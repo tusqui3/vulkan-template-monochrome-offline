@@ -61,7 +61,6 @@ target_include_directories(vkrt PRIVATE
     src
 )
 
-# SHADER_DIR baked in at compile time so shaders are always found
 target_compile_definitions(vkrt PRIVATE
     SHADER_DIR="${SHADER_BIN_DIR}"
 )
