@@ -4,10 +4,8 @@ project(vkrt CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ── Vulkan ────────────────────────────────────────────────────────────────────
 find_package(Vulkan REQUIRED)
 
-# ── Shader compiler: prefer glslc, fall back to glslangValidator ──────────────
 find_program(GLSLC glslc HINTS $ENV{VULKAN_SDK}/bin /usr/bin /usr/local/bin)
 if(GLSLC)
     set(GLSL_COMPILER ${GLSLC})
@@ -24,7 +22,6 @@ else()
     message(STATUS "Using glslangValidator as shader compiler")
 endif()
 
-# ── Shaders ───────────────────────────────────────────────────────────────────
 set(SHADER_SRC_DIR ${CMAKE_SOURCE_DIR}/shaders)
 set(SHADER_BIN_DIR ${CMAKE_BINARY_DIR}/shaders)
 file(MAKE_DIRECTORY ${SHADER_BIN_DIR})
@@ -51,7 +48,6 @@ endforeach()
 
 add_custom_target(shaders ALL DEPENDS ${SHADER_SPIRV})
 
-# ── Executable ────────────────────────────────────────────────────────────────
 add_executable(vkrt
     src/main.cpp
     src/Image.cpp
